@@ -3,6 +3,8 @@ const elSearch = document.querySelector(`.js-search`);
 const elMark = document.querySelector(`.js-mark`);
 const elModal = document.querySelector(`.js-modal`);
 const elList = document.querySelector(`.js-list`);
+const elMarkButton = document.querySelector(`.js-mark-button`);
+const elMarkList = document.querySelector(`.js-mark-list`);
 
 const markArr = [];
 
@@ -72,7 +74,6 @@ function render(data) {
     // Bookmark
     newCheck.addEventListener(`click`, (evt) => {
       let parrentId = evt.target.parentNode.parentNode.parentNode.dataset.id;
-      console.log(parrentId);
       if (newCheck.checked == 1) {
         markArr.push(parrentId);
         elMark.textContent = markArr.length;
@@ -144,4 +145,34 @@ setTimeout(() => {
 window.addEventListener(`load`, () => {
   const elLoading = document.querySelector(`.js-loading`);
   elLoading.classList.add(`d-none`);
+});
+
+// markList
+elMarkButton.addEventListener(`click`, () => {
+  for (let i = 0; i < markArr.length; i++) {
+    const markId = markArr[i];
+
+    const newItem = document.createElement(`li`);
+    newItem.classList = `d-flex mb-3 py-2 border-bottom`;
+
+    const newName = document.createElement(`p`);
+    newName.classList = `m-0`;
+
+    const newValue = document.createElement(`p`);
+    newValue.classList = `m-0 ms-auto`;
+
+    sortArr.forEach((element) => {
+      let newElId = element.id;
+      let newElName = element.CcyNm_UZ;
+      let newElValue = element.Diff;
+
+      if (markId == newElId) {
+        newName.textContent = newElName;
+        newValue.textContent = newElValue;
+      }
+    });
+
+    newItem.append(newName, newValue);
+    elMarkList.append(newItem);
+  }
 });
