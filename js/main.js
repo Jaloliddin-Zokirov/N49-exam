@@ -149,6 +149,7 @@ window.addEventListener(`load`, () => {
 
 // markList
 elMarkButton.addEventListener(`click`, () => {
+  elMarkList.innerHTML = ``;
   for (let i = 0; i < markArr.length; i++) {
     const markId = markArr[i];
 
